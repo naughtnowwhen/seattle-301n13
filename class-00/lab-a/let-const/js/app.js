@@ -40,7 +40,8 @@ function displayPics(){
   // PUT YOUR RESPONSE IN THIS COMMENT because the scope was changed, var i believe has function scope while let has block
   console.log(viewed);
 
-  for (const i = 0; i < 3; i++){
+  for (let i = 0; i < 3; i++){
+    //this one broke because you cannot use a constant as an iterator, they are completely different use cases, and this is perfect for let
     const temp = viewed.shift();
     pics[i].src = allProducts[temp].path;
     pics[i].id = allProducts[temp].name;
@@ -128,7 +129,8 @@ if(localStorage.busmall){
   allProducts = JSON.parse(localStorage.busmall);
 } else {
   console.log('There is no local storage data; initialize app by creating instances');
-  for(const i = 0; i < names.length; i++) {
+  for(let i = 0; i < names.length; i++) {
+    //this one broke because you cannot use a constant as an iterator, they are completely different use cases, and this is perfect for let
     new Product(names[i]);
   }
 }
