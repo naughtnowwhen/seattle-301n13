@@ -108,15 +108,14 @@ console.log('Hello from the new object function', newObject(['hi', 'hello', 'are
 
 
 
-let sum = function(a, b, c, d) {
-  return a + b + c + d;
-};
+let sum = (a, b, c, d) => a + b + c + d;
+
 
 // TODO: Uncomment the following line of code to see the output in the browser console
-console.log(sum(1, 2, 3, 4));
+console.log(sum(1, 2, 3, 4)); //?
 
 
-let objectLit = function() {
+let objectLit = () => {
   return {
     key1: 'value1',
     key2: 'value2',
@@ -128,7 +127,7 @@ let objectLit = function() {
 console.log(objectLit());
 
 
-let sumAndProduct = function(a, b) {
+let sumAndProduct = (a, b)=> {
   let sum = a + b;
   let product = a * b;
   return [sum, product];
@@ -138,61 +137,74 @@ let sumAndProduct = function(a, b) {
 console.log(sumAndProduct(3, 9));
 
 
-let message = function(name) {
-  return `Hello, ${name}!`;
-};
+let message = (name) => `Hello, ${name}!`;
 
 // TODO: Uncomment the following line of code to see the output in the browser console
 console.log(message('Allie'));
 
 
-let Student = function(name, age, hometown) {
+
+let Student = (name, age, hometown) =>{
   this.name = name;
   this.age = age;
   this.hometown = hometown;
 };
+//commenting the following out due to expected error messing up my screen. 
 
-let joe = new Student('Joe', 'Schmoe', 100);
+let error1 = `ah oh, i get the error Student is not a constructor! No good with arrow functions`;
+
+// let joe = new Student('Joe', 'Schmoe', 100);
 
 // TODO: Uncomment the following line of code to see the output in the browser console
 // Note that the arrow function will cause this code to break!
-console.log(joe);
+// console.log(joe);
 
 
-Student.prototype.greeting = function() {
-  return `Hi, my name is ${this.name}`;
-};
+let error2 = `error : Cannot set property 'greeting' of undefined`;
+
+// Student.prototype.greeting = function() {
+//   return `Hi, my name is ${this.name}`;
+// };
 
 // TODO: Uncomment the following line of code to see the output in the browser console
 // Note that the arrow function will cause this method to break!
-console.log(joe.greeting());
+
+let error3 = `error : joe is not defined`;
+
+// console.log(joe.greeting());
 
 
-Student.courseName = function() {
+Student.courseName = () => {
   return 'This student is enrolled in Code 301.';
 };
 
 // TODO: Uncomment the following line of code to see the output in the browser console
-console.log(Student.courseName());
+//undefined
+console.log(Student.courseName()); 
 
 
 
 // STEP 11
 // How do arrow functions affect constructor functions?
-Student.prototype.scope = function() {
-  console.log(this);
-};
+let error4 = 'Cannot set property scope of undefined';
+
+// Student.prototype.scope = function() {
+//   console.log(this);
+// };
 
 // TODO: Uncomment the following line of code to see the output in the browser console
-console.log(joe.scope());
+// console.log(joe.scope());
 
-Student.prototype.scopeArrow = () => console.log(typeof this);
+// Student.prototype.scopeArrow = () => console.log(typeof this);
 
 // TODO: Uncomment the following line of code to see the output in the browser console
-console.log(joe.scopeArrow());
+// console.log(joe.scopeArrow());
 
 // TODO: Write a COMMENT below to answer the following questions.
 // 1. What is "this" when joe.scope() is invoked?
+
+//joe.scope is invalid because the original constructor, converted from regular to arrow function, doesnt work as a constructor in the first place, so constructions or methods built by it do not work.
+
 // this is the joe object literal, the original constructed object. 
 
 // 2. What is "this" when joe.scopeArrow() is invoked?
