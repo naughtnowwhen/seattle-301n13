@@ -143,12 +143,12 @@ let message = (name) => `Hello, ${name}!`;
 console.log(message('Allie'));
 
 
-
-let Student = (name, age, hometown) =>{
+//chaned back from arrow funtion, which breaks it!
+function Student (name, age, hometown) {
   this.name = name;
   this.age = age;
   this.hometown = hometown;
-};
+}
 //commenting the following out due to expected error messing up my screen. 
 
 let error1 = `ah oh, i get the error Student is not a constructor! No good with arrow functions`;
@@ -180,7 +180,7 @@ Student.courseName = () => {
 
 // TODO: Uncomment the following line of code to see the output in the browser console
 //undefined
-console.log(Student.courseName()); 
+console.log(Student.courseName());
 
 
 
@@ -188,14 +188,14 @@ console.log(Student.courseName());
 // How do arrow functions affect constructor functions?
 let error4 = 'Cannot set property scope of undefined';
 
-// Student.prototype.scope = function() {
-//   console.log(this);
-// };
+Student.prototype.scope = function() {
+  console.log(this);
+};
 
 // TODO: Uncomment the following line of code to see the output in the browser console
 // console.log(joe.scope());
 
-// Student.prototype.scopeArrow = () => console.log(typeof this);
+Student.prototype.scopeArrow = () => console.log(typeof this);
 
 // TODO: Uncomment the following line of code to see the output in the browser console
 // console.log(joe.scopeArrow());
@@ -205,16 +205,13 @@ let error4 = 'Cannot set property scope of undefined';
 
 //joe.scope is invalid because the original constructor, converted from regular to arrow function, doesnt work as a constructor in the first place, so constructions or methods built by it do not work.
 
-// this is the joe object literal, the original constructed object. 
+// this is the joe object literal, the original constructed object.
 
 // 2. What is "this" when joe.scopeArrow() is invoked?
-// it is undefined
+
+//my original answer, undefined, was incorrect, i've moved the code into a repl for quickness and clarity, and i see that typeof this is an Object, and 'this' is actually the global window object. This is because 'this' context bubbles up, and global window object is the last stop on that bubbling path. 
+
 // 3. Explain why "this" is different when an arrow function is used.
-// because the context for this in an arrow function isn't the scope of the function, or it's constructor, but the function calling it, i believe. yes, i have more confidence in that with the following test 
+// because the context for this in an arrow function isn't the scope of the function, or it's constructor, but the outside context, the parent scop, in these cases that outer context is the global window.  
+// 
 
-let makeSomething = () => {
- console.log(this);
-  return 'hello';
-}
-
-makeSomething();
